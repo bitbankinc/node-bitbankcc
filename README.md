@@ -3,6 +3,8 @@ Node.js library for bitbank.cc, Bitcoin exchange.
 
 [https://bitbank.cc/](https://bitbank.cc/)
 
+document: [https://docs.bitbank.cc/](https://docs.bitbank.cc/)
+
 # Install
 `npm install bitbankinc/node-bitbankcc`
 
@@ -49,6 +51,9 @@ api.getCandlestick("btc_jpy", "1day", 2017).then(function(res){
 ```
 
 ## Private API
+Private api requires API_KEY and API_SECRET.
+[https://bitbank.cc/account/api](https://bitbank.cc/account/api)
+
 ```
 var bitbank = require("node-bitbankcc");
 var api2 = bitbank.privateApi("your_api_key", "your_api_secret");
