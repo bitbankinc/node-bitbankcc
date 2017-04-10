@@ -1,0 +1,19 @@
+{
+  "name": "node-bitbankcc",
+  "version": "1.0.0",
+  "description": "bitbank.cc node.js library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bitbank.cc"
+  ],
+  "author": "Daisuke Shosaki",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "latest",
+    "request": "latest",
+    "request-promise": "latest"
+  }
+}
