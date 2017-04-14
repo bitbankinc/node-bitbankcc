@@ -1,2 +1,3 @@
-module.exports.privateApi = require("./lib/privateApi");
-module.exports.publicApi = require("./lib/publicApi");
+exports.constant = require("./lib/constant");
+exports.privateApi = require("./lib/privateApi");
+exports.publicApi = require("./lib/publicApi");
