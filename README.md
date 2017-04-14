@@ -6,7 +6,7 @@ Node.js library for bitbank.cc, Bitcoin exchange.
 document: [https://docs.bitbank.cc/](https://docs.bitbank.cc/)
 
 # Install
-`npm install bitbankinc/node-bitbankcc`
+`npm install node-bitbankcc`
 
 # How to use
 See `example` folder for detail.
