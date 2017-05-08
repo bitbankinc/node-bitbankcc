@@ -9,6 +9,10 @@
   "keywords": [
     "bitbank.cc"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitbankinc/node-bitbankcc.git"
+  },
   "author": "Daisuke Shosaki",
   "license": "MIT",
   "dependencies": {
