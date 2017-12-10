@@ -111,3 +111,10 @@ api2.requestWithdraw("btc", "uuid", 0.01, {"otp_token": 123456}).then(function(r
   console.log(res);
 });
 ```
+
+
+### trade history
+```
+api2.getTradeHistory().then(console.log);
+api2.getTradeHistory({ pair: "btc_jpy" }).then(console.log);
+```
