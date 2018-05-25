@@ -29,11 +29,11 @@ export class Api {
     return this.request('GET', path, params, {}, headers);
   }
 
-  async post(path: string, body?: {}, headers?: {}) {
-    return this.request('POST', path, {}, body, headers);
+  async post(path: string, data?: {}, headers?: {}) {
+    return this.request('POST', path, {}, data, headers);
   }
 
-  async request(method: string, path: string, params?: {}, body?: {}, headers?: {}) {
+  async request(method: string, path: string, params?: {}, data?: {}, headers?: {}) {
     const options = {
       method: method,
       baseURL: this.endPoint,
@@ -49,8 +49,8 @@ export class Api {
     if (params && Object.keys(params).length > 0) {
       Object.assign(options, { params });
     }
-    if (body && Object.keys(body).length > 0) {
-      Object.assign(options, { body });
+    if (data && Object.keys(data).length > 0) {
+      Object.assign(options, { data });
     }
     if (headers && Object.keys(headers).length > 0) {
       Object.assign(options, { headers });
