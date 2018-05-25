@@ -41,9 +41,7 @@
     "vrsource-tslint-rules": "^5.8.0"
   },
   "dependencies": {
-    "@types/request-promise": "4.1.41",
-    "npm": "5.8.0",
-    "request": "2.85.0",
-    "request-promise": "4.2.2"
+    "axios": "^0.18.0",
+    "npm": "5.8.0"
   }
 }

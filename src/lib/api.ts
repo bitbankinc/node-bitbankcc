@@ -1,5 +1,7 @@
+import * as http from 'http';
+import * as https from 'https';
+import axios from 'axios';
 import { ApiConfig } from './type';
-import * as rp from 'request-promise';
 
 export interface ApiOptions {
   optionsCallback?: Function;
@@ -23,28 +25,32 @@ export class Api {
     }
   }
 
-  async get(path: string, query?: {}, headers?: {}) {
-    return this.request('GET', path, query, {}, headers);
+  async get(path: string, params?: {}, headers?: {}) {
+    return this.request('GET', path, params, {}, headers);
   }
 
-  async post(path: string, body?: {}, headers?: {}) {
-    return this.request('POST', path, {}, body, headers);
+  async post(path: string, data?: {}, headers?: {}) {
+    return this.request('POST', path, {}, data, headers);
   }
 
-  async request(method: string, path: string, qs?: {}, body?: {}, headers?: {}) {
+  async request(method: string, path: string, params?: {}, data?: {}, headers?: {}) {
     const options = {
       method: method,
-      uri: this.endPoint.concat(path),
+      baseURL: this.endPoint,
+      url: path,
       timeout: this.timeout,
-      forever: this.keepAlive,
-      json: true,
+      httpAgent: new http.Agent({ keepAlive: this.keepAlive }),
+      httpsAgent: new https.Agent({ keepAlive: this.keepAlive }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
 
-    if (qs && Object.keys(qs).length > 0) {
-      Object.assign(options, { qs });
+    if (params && Object.keys(params).length > 0) {
+      Object.assign(options, { params });
     }
-    if (body && Object.keys(body).length > 0) {
-      Object.assign(options, { body });
+    if (data && Object.keys(data).length > 0) {
+      Object.assign(options, { data });
     }
     if (headers && Object.keys(headers).length > 0) {
       Object.assign(options, { headers });
@@ -54,15 +60,18 @@ export class Api {
       await this.optionsCallback(options);
     }
 
-    return rp(options).then((res: any) => {
-      if (res.success === 1) {
-        if (this.responseCallback) {
-          this.responseCallback(res);
+    return axios
+      .request(options)
+      .then((res) => {
+        if (res.data.success === 1) {
+          if (this.responseCallback) {
+            this.responseCallback(res.data);
+          }
+          return res.data;
+        } else {
+          throw new Error(res.data.data.code);
         }
-        return res;
-      } else {
-        throw new Error(res.data.code);
-      }
-    });
+      })
+      .catch(console.log);
   }
 }
