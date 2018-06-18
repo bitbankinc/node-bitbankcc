@@ -1,0 +1,209 @@
+{
+  "extends": [
+    "tslint-eslint-rules"
+  ],
+  "rulesDirectory": [
+    "node_modules/vrsource-tslint-rules/rules"
+  ],
+  "rules": {
+    "arrow-return-shorthand": true,
+    "ban-types": [true, ["Object", "Use {} instead."], ["Array", "Use [] instead."]],
+    "block-spacing": [
+      true,
+      "always"
+    ],
+    "callable-types": true,
+    "class-name": true,
+    "comment-format": [
+      true,
+      "check-space"
+    ],
+    "curly": true,
+    "eofline": true,
+    "forin": true,
+    "import-blacklist": [
+      true,
+      "rxjs"
+    ],
+    "import-spacing": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "interface-over-type-literal": true,
+    "label-position": true,
+    "max-line-length": [
+      true,
+      140
+    ],
+    "member-access": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-conditional-assignment": true,
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-super": true,
+    "no-empty": false,
+    "no-empty-interface": true,
+    "no-eval": true,
+    "no-extra-semi": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
+    "no-inner-declarations": true,
+    "no-invalid-regexp": true,
+    "no-irregular-whitespace": true,
+    "no-misused-new": true,
+    "no-multi-spaces": true,
+    "no-non-null-assertion": false,
+    "no-regex-spaces": true,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
+    "no-trailing-whitespace": true,
+    "no-unnecessary-initializer": true,
+    "no-unused-expression": false,
+    "no-unused-variable": true,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-catch",
+      "check-else",
+      "check-whitespace"
+    ],
+    "prefer-const": true,
+    "prefer-function-over-method": false,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "radix": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "space-in-parens": [true, "never"],
+    "ter-indent": [
+      true,
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": {
+          "var": 1,
+          "let": 1,
+          "const": 1
+        },
+        "MemberExpression": 1,
+        "outerIIFEBody": 1,
+        "FunctionDeclaration": {
+          "body": 1
+        },
+        "FunctionExpression": {
+          "body": 1
+        }
+      }
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "unified-signatures": true,
+    "valid-typeof": true,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case"
+    ],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-separator",
+      "check-type"
+    ],
+
+    "ext-variable-name": [
+      true,
+      ["class",                 "pascal"],
+      ["interface",             "pascal"],
+      ["parameter",             "camel"],
+      ["property", "static",    "camel"],
+      ["property", "private",   "camel", "allow-leading-underscore"],
+      ["property", "protected", "camel", "allow-leading-underscore"],
+      ["variable", "local",     "camel"],
+      ["method", "private",     "camel", "allow-leading-underscore"],
+      ["method", "protected",   "camel", "allow-leading-underscore"],
+      ["function",              "camel"]
+    ],
+    "literal-spacing": [
+      true,
+      {
+        "array": ["never"],
+        "object": ["always"],
+        "import": ["always"]
+      }
+    ],
+    "prefer-case-blocks": true,
+    "prefer-literal": [
+      true,
+      "object",
+      "function"
+    ]
+  }
+}
