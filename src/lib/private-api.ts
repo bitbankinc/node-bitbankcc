@@ -30,7 +30,7 @@ export class PrivateApi extends Api {
   private static toSha256(key: string, value: string): string {
     return crypto
       .createHmac('sha256', key)
-      .update(new Buffer(value))
+      .update(Buffer.from(value))
       .digest('hex')
       .toString();
   }
