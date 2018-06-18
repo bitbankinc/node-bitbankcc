@@ -2,6 +2,14 @@ import * as assert from 'power-assert';
 import { PublicApi } from './public-api';
 import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './requestType';
 
+function getYesterdayYYYYMMDD(): string {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  const m = ('00' + (date.getMonth() + 1)).slice(-2);
+  const d = ('00' + date.getDate()).slice(-2);
+  return date.getFullYear() + m + d;
+}
+
 const config = require('config');
 
 const getTickerTest = async () => {
@@ -26,7 +34,7 @@ const getDailyTransactionsTest = async () => {
   const publicApi = new PublicApi(config.publicApi);
   const params: GetTransactionsRequest = {
     pair: 'btc_jpy',
-    yyyymmdd: '20180401',
+    yyyymmdd: getYesterdayYYYYMMDD(),
   };
   const res = await publicApi.getTransactions(params);
   assert.equal(res.success, 1);
@@ -46,7 +54,7 @@ const getCandlestickTest = async () => {
   const params: GetCandleStickRequest = {
     pair: 'btc_jpy',
     candleType: '1hour',
-    yyyymmdd: '20180401',
+    yyyymmdd: getYesterdayYYYYMMDD(),
   };
   const res = await publicApi.getCandlestick(params);
   assert.equal(res.success, 1);
@@ -57,5 +65,5 @@ describe('PublicAPI Test', () => {
   it('GET /{pair}/depth', getDepthTest);
   it('GET /{pair}/transactions', getTransactionsTest);
   it('GET /{pair}/transactions/{YYYYMMDD}', getDailyTransactionsTest);
-  it('GET /{pair}/candlestick/{candle-type}/{YYYY}', getCandlestickTest);
+  it('GET /{pair}/candlestick/{candle-type}/{YYYYMMDD}', getCandlestickTest);
 });
