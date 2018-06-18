@@ -1,0 +1,10 @@
+{
+  "privateApi" : {
+    "apiKey": "-",
+    "apiSecret": "-",
+    "endPoint": "http://localhost:8080/v1"
+  },
+  "publicApi" : {
+    "endPoint": "http://localhost:8080"
+  }
+}
