@@ -71,7 +71,6 @@ export class Api {
         } else {
           throw new Error(res.data.data.code);
         }
-      })
-      .catch(console.log);
+      });
   }
 }
