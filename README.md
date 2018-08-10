@@ -169,7 +169,7 @@ const res = await privateApi.cancelOrders(params);
 
 ##### getOrdersInfo
 ```typescript
-  const params: GetOrdersRequest = {
+const params: GetOrdersRequest = {
   order_ids: [14541343, 14541344],	// required
   pair: 'btc_jpy',					// optional
 };
