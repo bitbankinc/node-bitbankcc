@@ -1,28 +1,26 @@
 import * as crypto from 'crypto';
 import * as querystring from 'querystring';
 import { Api, ApiOptions } from './api';
-import { PrivateApiConfig } from './type';
-import {
-  ActiveOrdersResponse,
-  AssetsResponse,
-  OrderResponse,
-  OrdersResponse,
-  Response,
-  TradeHistoryResponse,
-  WithdrawalAccountResponse,
-  WithdrawalResponse,
-} from './responseType';
 import {
   ActiveOrderRequest,
+  ActiveOrdersResponse,
+  AssetsResponse,
   CancelOrderRequest,
   CancelOrdersRequest,
   GetOrderRequest,
   GetOrdersRequest,
   OrderRequest,
+  OrderResponse,
+  OrdersResponse,
+  PrivateApiConfig,
+  Response,
   TradeHistoryRequest,
+  TradeHistoryResponse,
   WithdrawalAccountRequest,
+  WithdrawalAccountResponse,
   WithdrawalRequest,
-} from './requestType';
+  WithdrawalResponse,
+} from './types';
 
 const URL_API_BITBANK = 'https://api.bitbank.cc/v1';
 

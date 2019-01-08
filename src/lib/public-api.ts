@@ -1,6 +1,15 @@
 import { Api } from './api';
-import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './requestType';
-import { CandlestickResponse, DepthResponse, Response, TickerResponse, TransactionsResponse } from './responseType';
+import {
+  CandlestickResponse,
+  DepthResponse,
+  GetCandleStickRequest,
+  GetDepthRequest,
+  GetTickerRequest,
+  GetTransactionsRequest,
+  Response,
+  TickerResponse,
+  TransactionsResponse,
+} from './types';
 
 export class PublicApi extends Api {
   public getTicker(params: GetTickerRequest): Promise<Response<TickerResponse>> {

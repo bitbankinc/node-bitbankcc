@@ -7,4 +7,10 @@ export interface ApiConfig {
 export interface PrivateApiConfig extends ApiConfig {
   apiKey: string;
   apiSecret: string;
+  otp: boolean;
+}
+
+export interface Config {
+  publicApi: ApiConfig;
+  privateApi: PrivateApiConfig;
 }

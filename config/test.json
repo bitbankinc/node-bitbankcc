@@ -2,7 +2,8 @@
   "privateApi" : {
     "apiKey": "-",
     "apiSecret": "-",
-    "endPoint": "http://localhost:8080/v1"
+    "endPoint": "http://localhost:8080/v1",
+    "otp": false
   },
   "publicApi" : {
     "endPoint": "http://localhost:8080"

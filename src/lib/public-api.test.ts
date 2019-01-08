@@ -1,6 +1,6 @@
 import * as assert from 'power-assert';
 import { PublicApi } from './public-api';
-import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './requestType';
+import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './types';
 
 function getYesterdayYYYYMMDD(): string {
   const date = new Date();
