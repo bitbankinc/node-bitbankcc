@@ -7,8 +7,7 @@
     "url": "https://github.com/bitbankinc/node-bitbankcc"
   },
   "engines": {
-    "node": ">= 8.11.0",
-    "npm": "6.1.0"
+    "node": ">= 8.11.0"
   },
   "license": "MIT",
   "main": "dist/index.js",
