@@ -60,17 +60,15 @@ export class Api {
       await this.optionsCallback(options);
     }
 
-    return axios
-      .request(options)
-      .then((res) => {
-        if (res.data.success === 1) {
-          if (this.responseCallback) {
-            this.responseCallback(res.data);
-          }
-          return res.data;
-        } else {
-          throw new Error(res.data.data.code);
+    return axios.request(options).then((res) => {
+      if (res.data.success === 1) {
+        if (this.responseCallback) {
+          this.responseCallback(res.data);
         }
-      });
+        return res.data;
+      } else {
+        throw new Error(res.data.data.code);
+      }
+    });
   }
 }
