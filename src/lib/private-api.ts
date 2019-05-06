@@ -101,17 +101,17 @@ export class PrivateApi extends Api {
   }
 
   get<T>(path: string, query?: {}) {
-    path = '/'.concat(this.version, path)
+    path = `/${this.version}${path}`
     let params = '';
     if (query && Object.keys(query).length) {
       params += '?' + querystring.stringify(query);
     }
-    const headers = this.makeHeader(path.concat(params));
+    const headers = this.makeHeader(`${path}${params}`);
     return super.get(path, query, headers);
   }
 
   post<T>(path: string, query: {}) {
-    path = '/'.concat(this.version, path)
+    path = `/${this.version}${path}`
     const data = JSON.stringify(query);
     const headers = this.makeHeader(data);
     return super.post(path, query, headers);
@@ -119,7 +119,7 @@ export class PrivateApi extends Api {
 
   private makeHeader(uri: string): any {
     this.nonce++;
-    const message: string = this.nonce.toString().concat(uri);
+    const message: string = `${this.nonce}${uri}`;
     return {
       'Content-Type': 'application/json',
       'ACCESS-KEY': this.apiKey,

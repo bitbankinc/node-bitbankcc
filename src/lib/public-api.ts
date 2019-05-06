@@ -4,25 +4,25 @@ import { CandlestickResponse, DepthResponse, Response, TickerResponse, Transacti
 
 export class PublicApi extends Api {
   public getTicker(params: GetTickerRequest): Promise<Response<TickerResponse>> {
-    const path: string = '/'.concat(params.pair, '/ticker');
+    const path: string = `/${params.pair}/ticker`;
     return this.get(path);
   }
 
   public getDepth(params: GetDepthRequest): Promise<Response<DepthResponse>> {
-    const path: string = '/'.concat(params.pair, '/depth');
+    const path: string = `/${params.pair}/depth`;
     return this.get(path);
   }
 
   public getTransactions(params: GetTransactionsRequest): Promise<Response<TransactionsResponse>> {
-    let path: string = '/'.concat(params.pair, '/transactions');
+    let path: string = `/${params.pair}/transactions`;
     if (params.yyyymmdd) {
-      path = path.concat('/', params.yyyymmdd);
+      path = `${path}/${params.yyyymmdd}`;
     }
     return this.get(path);
   }
 
   public getCandlestick(params: GetCandleStickRequest): Promise<Response<CandlestickResponse>> {
-    const path: string = '/'.concat(params.pair, '/candlestick/', params.candleType, '/', params.yyyymmdd);
+    const path: string = `/${params.pair}/candlestick/${params.candleType}/${params.yyyymmdd}`;
     return this.get(path);
   }
 }
