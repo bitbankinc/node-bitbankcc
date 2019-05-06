@@ -37,6 +37,7 @@ export class PrivateApi extends Api {
 
   private readonly apiKey: string;
   private readonly apiSecret: string;
+  private readonly version: string;
 
   private nonce: number;
 
@@ -45,7 +46,8 @@ export class PrivateApi extends Api {
     super(config, options);
     this.apiKey = config.apiKey;
     this.apiSecret = config.apiSecret;
-    this.nonce = new Date().getTime();
+    this.nonce = new Date().getTime() * 100;
+    this.version = 'v1';
   }
 
   public getAssets(): Promise<Response<AssetsResponse>> {
@@ -99,15 +101,17 @@ export class PrivateApi extends Api {
   }
 
   get<T>(path: string, query?: {}) {
+    path = '/'.concat(this.version, path)
     let params = '';
     if (query && Object.keys(query).length) {
       params += '?' + querystring.stringify(query);
     }
-    const headers = this.makeHeader('/v1'.concat(path, params));
+    const headers = this.makeHeader(path.concat(params));
     return super.get(path, query, headers);
   }
 
   post<T>(path: string, query: {}) {
+    path = '/'.concat(this.version, path)
     const data = JSON.stringify(query);
     const headers = this.makeHeader(data);
     return super.post(path, query, headers);
