@@ -24,7 +24,7 @@ import {
   WithdrawalRequest,
 } from './requestType';
 
-const URL_API_BITBANK = 'https://api.bitbank.cc/v1';
+const URL_API_BITBANK = 'https://api.bitbank.cc';
 
 export class PrivateApi extends Api {
   private static toSha256(key: string, value: string): string {
@@ -101,7 +101,7 @@ export class PrivateApi extends Api {
   }
 
   get<T>(path: string, query?: {}) {
-    path = `/${this.version}${path}`
+    path = `/${this.version}${path}`;
     let params = '';
     if (query && Object.keys(query).length) {
       params += '?' + querystring.stringify(query);
@@ -111,7 +111,7 @@ export class PrivateApi extends Api {
   }
 
   post<T>(path: string, query: {}) {
-    path = `/${this.version}${path}`
+    path = `/${this.version}${path}`;
     const data = JSON.stringify(query);
     const headers = this.makeHeader(data);
     return super.post(path, query, headers);
@@ -119,7 +119,7 @@ export class PrivateApi extends Api {
 
   private makeHeader(uri: string): any {
     this.nonce++;
-    const message: string = `${this.nonce}${uri}`;
+    const message = `${this.nonce}${uri}`;
     return {
       'Content-Type': 'application/json',
       'ACCESS-KEY': this.apiKey,

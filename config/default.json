@@ -2,7 +2,7 @@
   "privateApi" : {
     "apiKey": "YOUR_API_KEY",
     "apiSecret": "YOUR_API_SECRET",
-    "endPoint": "https://api.bitbank.cc/v1"
+    "endPoint": "https://api.bitbank.cc"
   },
   "publicApi" : {
     "endPoint": "https://public.bitbank.cc"
