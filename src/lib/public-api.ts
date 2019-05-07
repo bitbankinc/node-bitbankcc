@@ -14,10 +14,7 @@ export class PublicApi extends Api {
   }
 
   public getTransactions(params: GetTransactionsRequest): Promise<Response<TransactionsResponse>> {
-    let path: string = `/${params.pair}/transactions`;
-    if (params.yyyymmdd) {
-      path = `${path}/${params.yyyymmdd}`;
-    }
+    const path: string = params.yyyymmdd ? `/${params.pair}/transactions/${params.yyyymmdd}` : `/${params.pair}/transactions`;
     return this.get(path);
   }
 
