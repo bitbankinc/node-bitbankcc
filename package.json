@@ -1,14 +1,13 @@
 {
   "name": "node-bitbankcc",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "node-bitbankcc",
   "repository": {
     "type": "git",
     "url": "https://github.com/bitbankinc/node-bitbankcc"
   },
   "engines": {
-    "node": ">= 8.11.0",
-    "npm": "6.1.0"
+    "node": ">= 8.11.0"
   },
   "license": "MIT",
   "main": "dist/index.js",
