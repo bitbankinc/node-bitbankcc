@@ -24,7 +24,7 @@ export interface GetCandleStickRequest {
 // Order
 export interface GetOrderRequest {
   order_id: number;
-  pair?: string;
+  pair: string;
 }
 
 export interface OrderRequest {
@@ -47,7 +47,7 @@ export interface CancelOrdersRequest {
 
 export interface GetOrdersRequest {
   order_ids: number[];
-  pair?: string;
+  pair: string;
 }
 
 export interface ActiveOrderRequest {
