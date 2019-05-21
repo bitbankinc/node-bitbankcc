@@ -105,9 +105,11 @@ export interface TradeResponse {
 
 // Withdraw
 export interface WithdrawalAccountResponse {
-  uuid: string;
-  label: string;
-  address: string;
+  accounts: Array<{
+    uuid: string;
+    label: string;
+    address: string;
+  }>;
 }
 
 export interface WithdrawalResponse {

@@ -1,4 +1,5 @@
 import * as assert from 'power-assert';
+import * as readlineSync from 'readline-sync';
 import { PrivateApi } from './private-api';
 import {
   ActiveOrderRequest,
@@ -13,6 +14,8 @@ import {
 } from './requestType';
 
 const config = require('config');
+
+let ctx: { orderId?: number } = {};
 
 const testInit = async () => {
   const privateApi = new PrivateApi(config.privateApi);
@@ -102,16 +105,17 @@ const postOrderTest = async () => {
     amount: '0.01',
     price: 1000,
     side: 'buy',
-    type: 'market',
+    type: 'limit',
   };
   const res = await privateApi.postOrder(params);
+  ctx = { orderId: res.data.order_id };
   assert.equal(res.success, 1);
 };
 
 const cancelOrderTest = async () => {
   const privateApi = new PrivateApi(config.privateApi);
   const params: CancelOrderRequest = {
-    order_id: 14541507,
+    order_id: ctx.orderId!,
     pair: 'btc_jpy',
   };
   const res = await privateApi.cancelOrder(params);
@@ -139,13 +143,18 @@ const getWithdrawalAccountTest = async () => {
 
 const requestWithdrawalTest = async () => {
   const privateApi = new PrivateApi(config.privateApi);
-  const params: WithdrawalRequest = {
-    asset: 'jpy',
-    uuid: '37195a40-3d70-11e8-9c3c-2bd004e45303',
-    amount: '1000',
-    otp_token: '652036',
+  const accountRequestParams: WithdrawalAccountRequest = {
+    asset: 'btc',
   };
-  const res = await privateApi.requestWithdrawal(params);
+  const uuid = await privateApi.getWithdrawalAccount(accountRequestParams).then(({ data }) => data.accounts[0].uuid);
+  const otp = process.env.NODE_ENV === 'production' ? readlineSync.question('OTP: ') : '';
+  const withdrawalRequestParams: WithdrawalRequest = {
+    uuid,
+    asset: 'btc',
+    amount: '1',
+    otp_token: otp,
+  };
+  const res = await privateApi.requestWithdrawal(withdrawalRequestParams);
   assert.equal(res.success, 1);
 };
 
