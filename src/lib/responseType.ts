@@ -6,19 +6,19 @@ export interface Response<T> {
 
 // Ticker
 export interface TickerResponse {
-  sell: string;
-  buy: string;
-  high: string;
-  low: string;
-  last: string;
+  sell: string | null;
+  buy: string | null;
+  high: string | null;
+  low: string | null;
+  last: string | null;
   vol: string;
   timestamp: number;
 }
 
 // Depth
 export interface DepthResponse {
-  asks: number[][];
-  bids: number[][];
+  asks: [string, string][];
+  bids: [string, string][];
 }
 
 // Transactions
