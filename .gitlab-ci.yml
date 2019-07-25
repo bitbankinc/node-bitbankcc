@@ -2,6 +2,11 @@ image: 'node:8.16.0'
 stages:
   - test
   - publish
+build:
+  stage: test
+  script:
+    - npm install --frozen-lockfile
+    - npm run build
 lint:
   stage: test
   script:
@@ -22,6 +27,7 @@ publish-production:
     - 'echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" >> ~/.npmrc'
     - 'echo "@bitbank:registry=https://registry.npmjs.org" >> ~/.npmrc'
     - npm install --frozen-lockfile
+    - npm run prepare
     - npm publish --access=public
   only:
     - production
