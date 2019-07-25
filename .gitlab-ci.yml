@@ -1,0 +1,30 @@
+image: 'node:8.16.0'
+stages:
+  - test
+  - publish
+lint:
+  stage: test
+  script:
+    - npm install --frozen-lockfile
+    - npm run ci:lint
+    - npm run ci:prettier
+can-publish:
+  stage: test
+  script:
+    - touch ~/.npmrc
+    - 'echo "//registry.npmjs.org/:_authToken=${NPM_READ_TOKEN}"'
+    - 'echo "@bitbank:registry=https://registry.npmjs.org"'
+    - npm install -g can-npm-publish
+    - can-npm-publish
+  only:
+    - master
+publish-production:
+  stage: publish
+  script:
+    - touch ~/.npmrc
+    - 'echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}"'
+    - 'echo "@bitbank:registry=https://registry.npmjs.org"'
+    - npm install --frozen-lockfile
+    - npm publish --access=public
+  only:
+    - production
