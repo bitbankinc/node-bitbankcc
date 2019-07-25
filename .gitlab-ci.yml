@@ -11,9 +11,6 @@ lint:
 can-publish:
   stage: test
   script:
-    - touch ~/.npmrc
-    - 'echo "//registry.npmjs.org/:_authToken=${NPM_READ_TOKEN}"'
-    - 'echo "@bitbank:registry=https://registry.npmjs.org"'
     - npm install -g can-npm-publish
     - can-npm-publish
   only:
@@ -22,8 +19,8 @@ publish-production:
   stage: publish
   script:
     - touch ~/.npmrc
-    - 'echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}"'
-    - 'echo "@bitbank:registry=https://registry.npmjs.org"'
+    - 'echo "//registry.npmjs.org/:_authToken=${NPM_PUBLISH_TOKEN}" >> ~/.npmrc'
+    - 'echo "@bitbank:registry=https://registry.npmjs.org" >> ~/.npmrc'
     - npm install --frozen-lockfile
     - npm publish --access=public
   only:
