@@ -70,14 +70,23 @@ export interface OrderResponse {
   start_amount: string;
   remaining_amount: string;
   executed_amount: string;
-  price: string;
+  price?: string;
   average_price: string;
   ordered_at: number;
   status: string;
 }
 
+// Cancel Order
+export interface CancelOrderResponse extends OrderResponse {
+  canceled_at: number;
+}
+
 export interface OrdersResponse {
-  orders: OrderResponse[];
+  orders: (OrderResponse | CancelOrderResponse)[];
+}
+
+export interface CancelOrdersResponse {
+  orders: CancelOrderResponse[];
 }
 
 export interface ActiveOrdersResponse {
