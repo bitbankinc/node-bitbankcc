@@ -5,6 +5,8 @@ import { PrivateApiConfig } from './type';
 import {
   ActiveOrdersResponse,
   AssetsResponse,
+  CancelOrderResponse,
+  CancelOrdersResponse,
   OrderResponse,
   OrdersResponse,
   Response,
@@ -53,7 +55,7 @@ export class PrivateApi extends Api {
     return this.get(path, {});
   }
 
-  public getOrder(params: GetOrderRequest): Promise<Response<OrderResponse>> {
+  public getOrder(params: GetOrderRequest): Promise<Response<OrderResponse | CancelOrderResponse>> {
     const path = '/user/spot/order';
     return this.get(path, params);
   }
@@ -63,12 +65,12 @@ export class PrivateApi extends Api {
     return this.post(path, params);
   }
 
-  public cancelOrder(params: CancelOrderRequest): Promise<Response<OrderResponse>> {
+  public cancelOrder(params: CancelOrderRequest): Promise<Response<CancelOrderResponse>> {
     const path = '/user/spot/cancel_order';
     return this.post(path, params);
   }
 
-  public cancelOrders(params: CancelOrdersRequest): Promise<Response<OrdersResponse>> {
+  public cancelOrders(params: CancelOrdersRequest): Promise<Response<CancelOrdersResponse>> {
     const path = '/user/spot/cancel_orders';
     return this.post(path, params);
   }
