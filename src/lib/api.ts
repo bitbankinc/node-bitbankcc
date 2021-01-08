@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
-import axios from 'axios';
+import axios, { Method } from 'axios';
 import { ApiConfig } from './type';
 
 export interface ApiOptions {
@@ -33,7 +33,7 @@ export class Api {
     return this.request('POST', path, {}, data, headers);
   }
 
-  async request(method: string, path: string, params?: {}, data?: {}, headers?: {}) {
+  async request(method: Method, path: string, params?: {}, data?: {}, headers?: {}) {
     const options = {
       method: method,
       baseURL: this.endPoint,
