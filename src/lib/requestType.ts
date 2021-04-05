@@ -33,6 +33,7 @@ export interface OrderRequest {
   price?: number;
   side: string;
   type: string;
+  post_only?: boolean;
 }
 
 export interface CancelOrderRequest {
