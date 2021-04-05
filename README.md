@@ -145,6 +145,7 @@ const params: OrderRequest = {
   price: 1000,						// optional
   side: 'buy',						// required
   type: 'market',					// required
+  post_only: false,					// optional
 };
 const res = await privateApi.postOrder(params);
 ```

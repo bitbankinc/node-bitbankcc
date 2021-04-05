@@ -71,8 +71,10 @@ export interface OrderResponse {
   remaining_amount: string;
   executed_amount: string;
   price?: string;
+  post_only?: boolean;
   average_price: string;
   ordered_at: number;
+  expire_at: number | null;
   status: string;
 }
 
