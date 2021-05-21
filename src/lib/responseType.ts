@@ -10,6 +10,7 @@ export interface TickerResponse {
   buy: string | null;
   high: string | null;
   low: string | null;
+  open: string | null;
   last: string | null;
   vol: string;
   timestamp: number;
