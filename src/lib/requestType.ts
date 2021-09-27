@@ -30,10 +30,11 @@ export interface GetOrderRequest {
 export interface OrderRequest {
   pair: string;
   amount: string;
-  price?: number;
+  price?: number | string;
   side: string;
   type: string;
   post_only?: boolean;
+  trigger_price?: number | string;
 }
 
 export interface CancelOrderRequest {

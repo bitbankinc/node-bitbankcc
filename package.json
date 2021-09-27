@@ -1,13 +1,13 @@
 {
   "name": "node-bitbankcc",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "node-bitbankcc",
   "repository": {
     "type": "git",
     "url": "https://github.com/bitbankinc/node-bitbankcc"
   },
   "engines": {
-    "node": ">= 8.11.0"
+    "node": ">= 12.0.0"
   },
   "license": "MIT",
   "main": "dist/index.js",
@@ -43,6 +43,6 @@
     "vrsource-tslint-rules": "6.0.0"
   },
   "dependencies": {
-    "axios": "0.21.1"
+    "axios": "^0.21.4"
   }
 }

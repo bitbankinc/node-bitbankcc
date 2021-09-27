@@ -75,7 +75,9 @@ export interface OrderResponse {
   post_only?: boolean;
   average_price: string;
   ordered_at: number;
-  expire_at: number | null;
+  expire_at: number;
+  triggered_at?: number;
+  trigger_price?: string;
   status: string;
 }
 
