@@ -106,6 +106,7 @@ const postOrderTest = async () => {
     price: 1000,
     side: 'buy',
     type: 'limit',
+    post_only: true,
   };
   const res = await privateApi.postOrder(params);
   ctx = { orderId: res.data.order_id };

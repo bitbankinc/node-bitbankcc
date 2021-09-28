@@ -1,6 +1,6 @@
 import * as http from 'http';
 import * as https from 'https';
-import axios, { Method } from 'axios';
+import * as axios from 'axios';
 import { ApiConfig } from './type';
 
 export interface ApiOptions {
@@ -33,7 +33,7 @@ export class Api {
     return this.request('POST', path, {}, data, headers);
   }
 
-  async request(method: Method, path: string, params?: {}, data?: {}, headers?: {}) {
+  async request(method: axios.Method, path: string, params?: {}, data?: {}, headers?: {}) {
     const options = {
       method: method,
       baseURL: this.endPoint,
@@ -60,7 +60,7 @@ export class Api {
       await this.optionsCallback(options);
     }
 
-    return axios.request(options).then((res) => {
+    return axios.default.request(options).then((res) => {
       if (res.data.success === 1) {
         if (this.responseCallback) {
           this.responseCallback(res.data);
