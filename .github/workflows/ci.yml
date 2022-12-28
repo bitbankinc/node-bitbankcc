@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.6
+      - run: npm install
+      - run: npm run build
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.6
+      - run: npm install
+      - run: npm run ci:lint
+      - run: npm run ci:prettier
+  test:
+    runs-on: ubuntu-22.04
+    services:
+      mock:
+        image: ghcr.io/bitbankinc/mock-bitbankcc
+        ports:
+          - 8080:8080
+        # specifying healthcheck will ensures that service is running...
+        options: >-
+          --health-cmd "curl -f http://localhost:8080/btc_jpy/ticker || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14.17.6
+      - run: npm install
+      - run: npm run test
