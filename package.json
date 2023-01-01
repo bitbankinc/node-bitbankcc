@@ -30,7 +30,7 @@
     "@types/node": "^12.6.8",
     "@types/power-assert": "1.5.0",
     "@types/readline-sync": "1.4.3",
-    "config": "3.2.2",
+    "config": "3.3.8",
     "intelli-espower-loader": "1.0.1",
     "mocha": "6.2.0",
     "power-assert": "1.6.1",
