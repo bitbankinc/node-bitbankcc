@@ -68,10 +68,27 @@ export interface TradeHistoryRequest {
   order_id?: number;
   since?: number;
   end?: number;
-  order?: string;
+  order?: 'asc' | 'desc';
+}
+
+// Deposit
+export interface DepositHistoryRequest {
+  asset: string;
+  count?: number;
+  since?: number;
+  end?: number;
+  order?: 'asc' | 'desc';
 }
 
 // Withdraw
+export interface WithdrawalHistoryRequest {
+  asset: string;
+  count?: number;
+  since?: number;
+  end?: number;
+  order?: 'asc' | 'desc';
+}
+
 export interface WithdrawalAccountRequest {
   asset: string;
 }

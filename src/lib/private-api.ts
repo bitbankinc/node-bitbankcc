@@ -7,22 +7,26 @@ import {
   AssetsResponse,
   CancelOrderResponse,
   CancelOrdersResponse,
+  DepositHistoryResponse,
   OrderResponse,
   OrdersResponse,
   Response,
   TradeHistoryResponse,
   WithdrawalAccountResponse,
+  WithdrawalHistoryResponse,
   WithdrawalResponse,
 } from './responseType';
 import {
   ActiveOrderRequest,
   CancelOrderRequest,
   CancelOrdersRequest,
+  DepositHistoryRequest,
   GetOrderRequest,
   GetOrdersRequest,
   OrderRequest,
   TradeHistoryRequest,
   WithdrawalAccountRequest,
+  WithdrawalHistoryRequest,
   WithdrawalRequest,
 } from './requestType';
 
@@ -87,6 +91,16 @@ export class PrivateApi extends Api {
 
   public getTradeHistory(params: TradeHistoryRequest): Promise<Response<TradeHistoryResponse>> {
     const path = '/user/spot/trade_history';
+    return this.get(path, params);
+  }
+
+  public getDepositHistory(params: DepositHistoryRequest): Promise<Response<DepositHistoryResponse>> {
+    const path = '/user/deposit_history';
+    return this.get(path, params);
+  }
+
+  public getWithdrawalHistory(params: WithdrawalHistoryRequest): Promise<Response<WithdrawalHistoryResponse>> {
+    const path = '/user/withdrawal_history';
     return this.get(path, params);
   }
 

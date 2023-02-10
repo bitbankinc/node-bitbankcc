@@ -117,23 +117,56 @@ export interface TradeResponse {
   executed_at: number;
 }
 
+// Deposit
+export interface DepositResponse {
+  uuid: string;
+  asset: string;
+  amount: string;
+
+  txid?: string | null;  // only for cryptocurrencies.
+
+  found_at: number;
+  confirmed_at?: number;  // only when confirmed.
+  status: string;
+}
+
+export interface DepositHistoryResponse {
+  deposits: DepositResponse[];
+}
+
 // Withdraw
 export interface WithdrawalAccountResponse {
-  accounts: Array<{
+  accounts: {
     uuid: string;
     label: string;
     address: string;
-  }>;
+  }[];
 }
 
 export interface WithdrawalResponse {
   uuid: string;
   asset: string;
-  amount: number;
   account_uuid: string;
+  amount: string;
   fee: string;
+
+  // they are only for fiat.
+  bank_name?: string;
+  branch_name?: string;
+  account_type?: string;
+  account_number?: string;
+  account_owner?: string;
+
+  // they are only for cryptocurrencies.
+  label?: string;
+  address?: string;
+  txid?: string | null;
+  destination_tag?: number | string; // only for some cryptocurrencies.
+
   status: string;
-  label: string;
-  txid: string;
-  address: string;
+  requested_at: number;
+}
+
+export interface WithdrawalHistoryResponse {
+  withdrawals: WithdrawalResponse[];
 }
