@@ -203,6 +203,18 @@ const params: TradeHistoryRequest = {
 const res = await privateApi.getTradeHistory(params);
 ```
 
+##### getDepositHistory
+```typescript
+const params: DepositHistoryRequest = {
+  asset: 'btc',						// required
+  count: 1,							// optional
+  since: 1523419311277,				// optional
+  end: 1523419024484,				// optional
+  order: 'asc',						// optional
+};
+const res = await privateApi.getDepositHistory(params);
+```
+
 ##### getWithdrawalAccount
 ```typescript
 const params: WithdrawalAccountRequest = {
@@ -223,8 +235,21 @@ const params: WithdrawalRequest = {
 const res = await privateApi.requestWithdrawal(params);
 ```
 
- ## 実装の確認/モックについて
- 
- 以下のリポジトリのモックサーバーを用いて
- SDKが正しく実装されているかを確認することができます。
- https://github.com/bitbankinc/mock-bitbankcc
+##### getWithdrawalHistory
+
+```typescript
+const params: WithdrawalHistoryRequest = {
+  asset: 'btc',						// required
+  count: 1,							// optional
+  since: 1523419311277,				// optional
+  end: 1523419024484,				// optional
+  order: 'asc',						// optional
+};
+const res = await privateApi.getWithdrawalHistory(params);
+```
+
+## 実装の確認/モックについて
+
+以下のリポジトリのモックサーバーを用いて
+SDKが正しく実装されているかを確認することができます。
+https://github.com/bitbankinc/mock-bitbankcc

@@ -5,11 +5,13 @@ import {
   ActiveOrderRequest,
   CancelOrderRequest,
   CancelOrdersRequest,
+  DepositHistoryRequest,
   GetOrderRequest,
   GetOrdersRequest,
   OrderRequest,
   TradeHistoryRequest,
   WithdrawalAccountRequest,
+  WithdrawalHistoryRequest,
   WithdrawalRequest,
 } from './requestType';
 
@@ -133,6 +135,16 @@ const cancelOrdersTest = async () => {
   assert.equal(res.success, 1);
 };
 
+const getDepositHistoryTest = async () => {
+  const privateApi = new PrivateApi(config.privateApi);
+  const params: DepositHistoryRequest = {
+    asset: 'jpy',
+  };
+  const res = await privateApi.getDepositHistory(params);
+  assert.equal(res.success, 1);
+  assert.equal(res.data.deposits[0].asset, 'jpy');
+};
+
 const getWithdrawalAccountTest = async () => {
   const privateApi = new PrivateApi(config.privateApi);
   const params: WithdrawalAccountRequest = {
@@ -157,6 +169,26 @@ const requestWithdrawalTest = async () => {
   };
   const res = await privateApi.requestWithdrawal(withdrawalRequestParams);
   assert.equal(res.success, 1);
+};
+
+const getWithdrawalHistoryTest = async () => {
+  const privateApi = new PrivateApi(config.privateApi);
+
+  const params1: WithdrawalHistoryRequest = {
+    asset: 'jpy',
+  };
+  const res1 = await privateApi.getWithdrawalHistory(params1);
+  assert.equal(res1.success, 1);
+  assert.equal(res1.data.withdrawals[0].asset, 'jpy');
+  assert.notEqual(res1.data.withdrawals[0].bank_name, undefined);
+
+  const params2: WithdrawalHistoryRequest = {
+    asset: 'btc',
+  };
+  const res2 = await privateApi.getWithdrawalHistory(params2);
+  assert.equal(res2.success, 1);
+  assert.equal(res2.data.withdrawals[0].asset, 'btc');
+  assert.notEqual(res2.data.withdrawals[0].address, undefined);
 };
 
 const getTradeHistoryTest = async () => {
@@ -184,9 +216,9 @@ describe('PrivateAPI Test', () => {
   it('POST /user/spot/order', postOrderTest);
   it('POST /user/spot/cancel_order', cancelOrderTest);
   it('POST /user/spot/cancel_orders', cancelOrdersTest);
+  it('GET /user/deposit_history', getDepositHistoryTest);
   it('GET /user/withdrawal_account', getWithdrawalAccountTest);
   it('POST /user/request_withdrawal', requestWithdrawalTest);
-
-  // 現在停止中
+  it('GET /user/withdrawal_history', getWithdrawalHistoryTest);
   it('GET /user/spot/trade_history', getTradeHistoryTest);
 });
