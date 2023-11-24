@@ -59,7 +59,25 @@ export interface AssetResponse {
   free_amount: string;
   stop_deposit: boolean;
   stop_withdrawal: boolean;
-  withdrawal_fee: any;
+  withdrawal_fee:
+    | {
+      min: string;
+      max: string;
+    } // for fiat.
+    | {
+      under: string;
+      over: string;
+      threshold: string;
+    }; // for cryptocurrencies.
+
+  // only for cryptocurrencies.
+  network_list?: {
+    asset: string;
+    network: string;
+    stop_deposit: boolean;
+    stop_withdrawal: boolean;
+    withdrawal_fee: string;
+  }[];
 }
 
 // Order
@@ -123,10 +141,11 @@ export interface DepositResponse {
   asset: string;
   amount: string;
 
-  txid?: string | null;  // only for cryptocurrencies.
+  txid?: string | null; // only for cryptocurrencies.
+  network?: string; // only for cryptocurrencies.
 
   found_at: number;
-  confirmed_at?: number;  // only when confirmed.
+  confirmed_at?: number; // only when confirmed.
   status: string;
 }
 
@@ -160,6 +179,7 @@ export interface WithdrawalResponse {
   // they are only for cryptocurrencies.
   label?: string;
   address?: string;
+  network?: string;
   txid?: string | null;
   destination_tag?: number | string; // only for some cryptocurrencies.
 
