@@ -20,6 +20,12 @@ export interface TickerResponse {
 export interface DepthResponse {
   asks: [string, string][];
   bids: [string, string][];
+  asks_over: string;
+  bids_under: string;
+  asks_under: string;
+  bids_over: string;
+  timestamp: number;
+  sequenceId: string;
 }
 
 // Transactions
@@ -189,4 +195,17 @@ export interface WithdrawalResponse {
 
 export interface WithdrawalHistoryResponse {
   withdrawals: WithdrawalResponse[];
+}
+
+// Circuit Break Info
+export interface CircuitBreakInfoResponse {
+  mode: 'NONE' | 'CIRCUIT_BREAK' | 'FULL_RANGE_CIRCUIT_BREAK' | 'RESUMPTION' | 'LISTING';
+  upper_trigger_price: string | null;
+  lower_trigger_price: string | null;
+  fee_type: 'NORMAL' | 'SELL_MAKER' | 'BUY_MAKER' | 'DYNAMIC';
+  estimated_itayose_price: string | null;
+  itayose_upper_price: string | null;
+  itayose_lower_price: string | null;
+  reopen_timestamp: number | null;
+  timestamp: number;
 }

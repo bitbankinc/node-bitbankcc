@@ -1,6 +1,19 @@
 import { Api } from './api';
-import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './requestType';
-import { CandlestickResponse, DepthResponse, Response, TickerResponse, TransactionsResponse } from './responseType';
+import {
+  GetCandleStickRequest,
+  GetCircuitBreakInfoRequest,
+  GetDepthRequest,
+  GetTickerRequest,
+  GetTransactionsRequest,
+} from './requestType';
+import {
+  CandlestickResponse,
+  CircuitBreakInfoResponse,
+  DepthResponse,
+  Response,
+  TickerResponse,
+  TransactionsResponse,
+} from './responseType';
 
 export class PublicApi extends Api {
   public getTicker(params: GetTickerRequest): Promise<Response<TickerResponse>> {
@@ -23,6 +36,11 @@ export class PublicApi extends Api {
 
   public getCandlestick(params: GetCandleStickRequest): Promise<Response<CandlestickResponse>> {
     const path: string = '/'.concat(params.pair, '/candlestick/', params.candleType, '/', params.yyyymmdd);
+    return this.get(path);
+  }
+
+  public getCircuitBreakInfo(params: GetCircuitBreakInfoRequest): Promise<Response<CircuitBreakInfoResponse>> {
+    const path: string = '/'.concat(params.pair, '/circuit_break_info');
     return this.get(path);
   }
 }
