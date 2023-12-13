@@ -100,3 +100,8 @@ export interface WithdrawalRequest {
   otp_token?: string;
   sms_token?: string;
 }
+
+// Circuit Break Info
+export interface GetCircuitBreakInfoRequest {
+  pair: string;
+}

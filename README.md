@@ -91,6 +91,14 @@ const params: GetCandleStickRequest = {
 const res = await publicApi.getCandlestick(params);
 ```
 
+##### getCircuitBreakInfo
+```typescript
+const params: GetCircuitBreakInfoRequest = {
+    pair: 'btc_jpy', 			// required
+};
+const res = await publicApi.getCircuitBreakInfo(params);
+```
+
 ### PrivateAPI
 PrivateAPIの初期化にはPrivateApiConfigが必要になります。
 
@@ -145,7 +153,7 @@ const params: OrderRequest = {
   price: 1000,						// optional
   side: 'buy',						// required
   type: 'market',					// required
-  post_only: false,					// optional
+  post_only: false,					// optional. Except for circuit_break_info.mode is NONE, this parm is ignored.
 };
 const res = await privateApi.postOrder(params);
 ```

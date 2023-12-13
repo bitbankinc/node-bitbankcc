@@ -1,6 +1,12 @@
 import * as assert from 'power-assert';
 import { PublicApi } from './public-api';
-import { GetCandleStickRequest, GetDepthRequest, GetTickerRequest, GetTransactionsRequest } from './requestType';
+import {
+  GetCandleStickRequest,
+  GetCircuitBreakInfoRequest,
+  GetDepthRequest,
+  GetTickerRequest,
+  GetTransactionsRequest,
+} from './requestType';
 
 function getYesterdayYYYYMMDD(): string {
   const date = new Date();
@@ -60,10 +66,20 @@ const getCandlestickTest = async () => {
   assert.equal(res.success, 1);
 };
 
+const getCircuitBreakInfoTest = async () => {
+  const publicApi = new PublicApi(config.publicApi);
+  const params: GetCircuitBreakInfoRequest = {
+    pair: 'btc_jpy',
+  };
+  const res = await publicApi.getCircuitBreakInfo(params);
+  assert.equal(res.success, 1);
+};
+
 describe('PublicAPI Test', () => {
   it('GET /{pair}/ticker', getTickerTest);
   it('GET /{pair}/depth', getDepthTest);
   it('GET /{pair}/transactions', getTransactionsTest);
   it('GET /{pair}/transactions/{YYYYMMDD}', getDailyTransactionsTest);
   it('GET /{pair}/candlestick/{candle-type}/{YYYYMMDD}', getCandlestickTest);
+  it('GET /{pair}/circuit_break_info', getCircuitBreakInfoTest);
 });
