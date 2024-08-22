@@ -41,15 +41,49 @@ const optionalCallbackTest = async () => {
   assert.equal(res.success, 1);
 };
 
+const authMethodTest = async () => {
+  const requestTimeConfig = {
+    ...config.privateApi,
+    authMethod: 'RequestTime',
+  };
+  const requestTimeOptions = {
+    optionsCallback: function(option: any) {
+      assert(!option.headers['ACCESS-NONCE']);
+      assert(option.headers['ACCESS-REQUEST-TIME']);
+      assert(option.headers['ACCESS-TIME-WINDOW']);
+    },
+  };
+  const requestTimePrivateApi = new PrivateApi(requestTimeConfig, requestTimeOptions);
+  await requestTimePrivateApi.getAssets();
+
+  const nonceConfig = {
+    ...config.privateApi,
+    authMethod: 'Nonce',
+  };
+  const nonceOptions = {
+    optionsCallback: function(option: any) {
+      assert(option.headers['ACCESS-NONCE']);
+      assert(!option.headers['ACCESS-REQUEST-TIME']);
+      assert(!option.headers['ACCESS-TIME-WINDOW']);
+    },
+  };
+  const noncePrivateApi = new PrivateApi(nonceConfig, nonceOptions);
+  await noncePrivateApi.getAssets();
+};
+
 const nonceIncrementTest = async () => {
   const nonces: number[] = [];
+  const nonceConfig = {
+    ...config.privateApi,
+    authMethod: 'Nonce',
+  };
   const options = {
     optionsCallback: function(option: any) {
       nonces.push(option.headers['ACCESS-NONCE']);
     },
   };
 
-  const privateApi = new PrivateApi(config.privateApi, options);
+  const privateApi = new PrivateApi(nonceConfig, options);
   await privateApi.getAssets();
 
   await privateApi.getAssets();
@@ -208,6 +242,7 @@ const getTradeHistoryTest = async () => {
 describe('PrivateAPI Test', () => {
   it('should init', testInit);
   it('should callback', optionalCallbackTest);
+  it('switch auth method at header', authMethodTest);
   it('nonce should increment', nonceIncrementTest);
   it('GET /user/assets', getAssetsTest);
   it('GET /user/spot/order', getOrderTest);

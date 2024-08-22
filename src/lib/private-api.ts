@@ -44,14 +44,19 @@ export class PrivateApi extends Api {
   private readonly apiKey: string;
   private readonly apiSecret: string;
 
+  private readonly authMethod: 'RequestTime' | 'Nonce';
   private nonce: number;
+  private timeWindow: number;
+
 
   constructor(config: PrivateApiConfig, options?: ApiOptions) {
     config.endPoint = config.endPoint || URL_API_BITBANK;
     super(config, options);
     this.apiKey = config.apiKey;
     this.apiSecret = config.apiSecret;
+    this.authMethod = config.authMethod || 'RequestTime';
     this.nonce = new Date().getTime();
+    this.timeWindow = config.timeWindow || 5000;
   }
 
   public getAssets(): Promise<Response<AssetsResponse>> {
@@ -119,23 +124,45 @@ export class PrivateApi extends Api {
     if (query && Object.keys(query).length) {
       params += '?' + querystring.stringify(query);
     }
-    const headers = this.makeHeader('/v1'.concat(path, params));
+    let headers;
+    if (this.authMethod === 'RequestTime') {
+      headers = this.makeRequestTimeHeader('/v1'.concat(path, params));
+    } else {
+      headers = this.makeNonceHeader('/v1'.concat(path, params));
+    }
     return super.get(path, query, headers);
   }
 
   post<T>(path: string, query: {}) {
     const data = JSON.stringify(query);
-    const headers = this.makeHeader(data);
+    let headers;
+    if (this.authMethod === 'RequestTime') {
+      headers = this.makeRequestTimeHeader(data);
+    } else {
+      headers = this.makeNonceHeader(data);
+    }
     return super.post(path, query, headers);
   }
 
-  private makeHeader(uri: string): any {
+  private makeNonceHeader(uri: string): any {
     this.nonce++;
     const message: string = this.nonce.toString().concat(uri);
     return {
       'Content-Type': 'application/json',
       'ACCESS-KEY': this.apiKey,
       'ACCESS-NONCE': this.nonce.toString(),
+      'ACCESS-SIGNATURE': PrivateApi.toSha256(this.apiSecret, message),
+    };
+  }
+
+  private makeRequestTimeHeader(uri: string): any {
+    const requestTime = new Date().getTime();
+    const message: string = requestTime.toString().concat(this.timeWindow.toString()).concat(uri);
+    return {
+      'Content-Type': 'application/json',
+      'ACCESS-KEY': this.apiKey,
+      'ACCESS-REQUEST-TIME': requestTime.toString(),
+      'ACCESS-TIME-WINDOW': this.timeWindow.toString(),
       'ACCESS-SIGNATURE': PrivateApi.toSha256(this.apiSecret, message),
     };
   }

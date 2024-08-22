@@ -7,4 +7,6 @@ export interface ApiConfig {
 export interface PrivateApiConfig extends ApiConfig {
   apiKey: string;
   apiSecret: string;
+  timeWindow?: number;
+  authMethod?: 'RequestTime' | 'Nonce';
 }

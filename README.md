@@ -103,12 +103,25 @@ const res = await publicApi.getCircuitBreakInfo(params);
 PrivateAPIの初期化にはPrivateApiConfigが必要になります。
 
 ```typescript
+// # ACCESS-TIME-WINDOW 方式
 const conf: PrivateApiConfig = {
-  endPoint: 'https://api.bitbank.cc/v1',  	// required
   apiKey: 'YOUR_API_KEY',					// required
   apiSecret: 'YOUR_SECRET_KEY',				// required
+  endPoint: 'https://api.bitbank.cc/v1',  	// optional, default->'https://api.bitbank.cc/v1'
   keepAlive: false,							// optional, default->false
   timeout: 3000,							// optional, default->3000
+  authMethod: 'RequestTime', // optional, default->'RequestTime'
+  timeWindow: 5000,         // optional, default->5000
+};
+
+// # ACCESS-NONCE 方式
+const conf: PrivateApiConfig = {
+  apiKey: 'YOUR_API_KEY',					// required
+  apiSecret: 'YOUR_SECRET_KEY',				// required
+  endPoint: 'https://api.bitbank.cc/v1',  	// optional, default->'https://api.bitbank.cc/v1'
+  keepAlive: false,							// optional, default->false
+  timeout: 3000,							// optional, default->3000
+  authMethod: 'Nonce',        // optional, default->'RequestTime'
 };
 
 const privateApi = new PrivateApi(conf);
