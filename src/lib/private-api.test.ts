@@ -100,6 +100,12 @@ const getAssetsTest = async () => {
   assert.equal(res.success, 1);
 };
 
+const getMarginPositionsTest = async () => {
+  const privateApi = new PrivateApi(config.privateApi);
+  const res = await privateApi.getMarginPositions();
+  assert.equal(res.success, 1);
+};
+
 const getOrderTest = async () => {
   const privateApi = new PrivateApi(config.privateApi);
   const params: GetOrderRequest = {
@@ -245,6 +251,7 @@ describe('PrivateAPI Test', () => {
   it('switch auth method at header', authMethodTest);
   it('nonce should increment', nonceIncrementTest);
   it('GET /user/assets', getAssetsTest);
+  it('GET /user/margin/positions', getMarginPositionsTest);
   it('GET /user/spot/order', getOrderTest);
   it('GET /user/spot/active_orders', getActiveOrdersTest);
   it('POST /user/spot/orders_info', getOrdersInfoTest);
