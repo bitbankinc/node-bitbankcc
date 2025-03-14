@@ -1,6 +1,6 @@
 {
   "name": "node-bitbankcc",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "node-bitbankcc",
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
     "tslint": "tslint --project ./tsconfig.json",
     "test": "NODE_ENV=test mocha src/**/*.test.ts --require ts-node/register --timeout 10000 --require intelli-espower-loader",
     "test:prod": "NODE_ENV=production mocha src/**/*.test.ts --require ts-node/register --timeout 10000 --require intelli-espower-loader",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublish:sandbox": "rm -fr node_modules && npm ci && npm run build && jq \".version += \\\"-$(git rev-parse HEAD)\\\" | .name |= \\\"@bitbank-sandbox/\\\" + .\" package.json > dist/package.json && cp -rf .npmignore dist",
+    "publish:sandbox": "cd dist && npm publish --registry https://gitlab.p0fuy9f4prap28og.bitbank.cc/api/v4/projects/578/packages/npm/"
   },
   "ciNode": "8",
   "devDependencies": {

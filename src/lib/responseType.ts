@@ -24,6 +24,8 @@ export interface DepthResponse {
   bids_under: string;
   asks_under: string;
   bids_over: string;
+  ask_market: string;
+  bid_market: string;
   timestamp: number;
   sequenceId: string;
 }
@@ -62,7 +64,9 @@ export interface AssetResponse {
   amount_precision: number;
   onhand_amount: string;
   locked_amount: string;
+  withdrawing_amount: string;
   free_amount: string;
+  collateral_ratio: string;
   stop_deposit: boolean;
   stop_withdrawal: boolean;
   withdrawal_fee:
@@ -86,10 +90,39 @@ export interface AssetResponse {
   }[];
 }
 
+// MarginPositions
+export interface MarginPositionsResponse {
+  notice: {
+    what: string | null;
+    occurred_at: number | null;
+    amount: string | null;
+    dueDateAt: number | null;
+  };
+  payables: {
+    amount: string;
+  };
+  positions: MarginPositionResponse[];
+  losscut_threshold: {
+    company: string;
+    indivisual: string;
+  };
+}
+
+export interface MarginPositionResponse {
+  pair: string;
+  position_side: string;
+  open_amount: string;
+  product: string;
+  average_price: string;
+  unrealized_fee_amount: string;
+  unrealized_interest_amount: string;
+}
+
 // Order
 export interface OrderResponse {
   order_id: number;
   pair: string;
+  position_side?: string;
   side: string;
   type: string;
   start_amount: string;
@@ -97,6 +130,7 @@ export interface OrderResponse {
   executed_amount: string;
   price?: string;
   post_only?: boolean;
+  user_cancelable: boolean;
   average_price: string;
   ordered_at: number;
   expire_at: number;
@@ -136,8 +170,12 @@ export interface TradeResponse {
   amount: string;
   price: string;
   maker_taker: string;
+  position_side?: string;
   fee_amount_base: string;
   fee_amount_quote: string;
+  fee_occurred_amount_quote?: string;
+  interest?: string;
+  profit_loss?: string;
   executed_at: number;
 }
 

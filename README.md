@@ -149,6 +149,12 @@ const res = await privateApi.getAssets();
 assert.equal(res.success, 1);
 ```
 
+##### getMarginPositions
+```typescript
+const res = await privateApi.getMarginPositions();
+assert.equal(res.success, 1);
+```
+
 ##### getOrder
 ```typescript
 const params: GetOrderRequest = {
@@ -167,6 +173,7 @@ const params: OrderRequest = {
   side: 'buy',						// required
   type: 'market',					// required
   post_only: false,					// optional. Except for circuit_break_info.mode is NONE, this parm is ignored.
+  position_side: 'long',   // optional
 };
 const res = await privateApi.postOrder(params);
 ```

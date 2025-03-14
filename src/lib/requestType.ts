@@ -34,6 +34,7 @@ export interface OrderRequest {
   side: string;
   type: string;
   post_only?: boolean;
+  position_side?: string;
   trigger_price?: number | string;
 }
 

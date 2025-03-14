@@ -8,6 +8,7 @@ import {
   CancelOrderResponse,
   CancelOrdersResponse,
   DepositHistoryResponse,
+  MarginPositionsResponse,
   OrderResponse,
   OrdersResponse,
   Response,
@@ -61,6 +62,11 @@ export class PrivateApi extends Api {
 
   public getAssets(): Promise<Response<AssetsResponse>> {
     const path = '/user/assets';
+    return this.get(path, {});
+  }
+
+  public getMarginPositions(): Promise<Response<MarginPositionsResponse>> {
+    const path = '/user/margin/positions';
     return this.get(path, {});
   }
 
