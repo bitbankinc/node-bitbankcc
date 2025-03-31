@@ -247,3 +247,8 @@ export interface CircuitBreakInfoResponse {
   reopen_timestamp: number | null;
   timestamp: number;
 }
+
+export interface SubscribeResponse {
+  pubnub_channel: string;
+  pubnub_token: string;
+}
