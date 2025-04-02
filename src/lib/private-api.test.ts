@@ -245,6 +245,12 @@ const getTradeHistoryTest = async () => {
   assert.equal(res.success, 1);
 };
 
+const getSubscribeTest = async () => {
+  const privateApi = new PrivateApi(config.privateApi);
+  const res = await privateApi.getSubscribe();
+  assert.equal(res.success, 1);
+};
+
 describe('PrivateAPI Test', () => {
   it('should init', testInit);
   it('should callback', optionalCallbackTest);
@@ -263,4 +269,5 @@ describe('PrivateAPI Test', () => {
   it('POST /user/request_withdrawal', requestWithdrawalTest);
   it('GET /user/withdrawal_history', getWithdrawalHistoryTest);
   it('GET /user/spot/trade_history', getTradeHistoryTest);
+  it('GET /user/subscribe', getSubscribeTest);
 });

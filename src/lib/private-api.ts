@@ -12,6 +12,7 @@ import {
   OrderResponse,
   OrdersResponse,
   Response,
+  SubscribeResponse,
   TradeHistoryResponse,
   WithdrawalAccountResponse,
   WithdrawalHistoryResponse,
@@ -48,7 +49,6 @@ export class PrivateApi extends Api {
   private readonly authMethod: 'RequestTime' | 'Nonce';
   private nonce: number;
   private timeWindow: number;
-
 
   constructor(config: PrivateApiConfig, options?: ApiOptions) {
     config.endPoint = config.endPoint || URL_API_BITBANK;
@@ -125,6 +125,11 @@ export class PrivateApi extends Api {
     return this.post(path, params);
   }
 
+  public getSubscribe(): Promise<Response<SubscribeResponse>> {
+    const path = '/user/subscribe';
+    return this.get(path, {});
+  }
+
   get<T>(path: string, query?: {}) {
     let params = '';
     if (query && Object.keys(query).length) {
@@ -163,7 +168,10 @@ export class PrivateApi extends Api {
 
   private makeRequestTimeHeader(uri: string): any {
     const requestTime = new Date().getTime();
-    const message: string = requestTime.toString().concat(this.timeWindow.toString()).concat(uri);
+    const message: string = requestTime
+      .toString()
+      .concat(this.timeWindow.toString())
+      .concat(uri);
     return {
       'Content-Type': 'application/json',
       'ACCESS-KEY': this.apiKey,

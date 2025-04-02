@@ -276,6 +276,11 @@ const params: WithdrawalHistoryRequest = {
 const res = await privateApi.getWithdrawalHistory(params);
 ```
 
+##### getSubscribe
+```typescript
+const res = await privateApi.getSubscribe();
+```
+
 ## 実装の確認/モックについて
 
 以下のリポジトリのモックサーバーを用いて
