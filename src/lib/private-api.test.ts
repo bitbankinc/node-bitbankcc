@@ -15,6 +15,7 @@ import {
   WithdrawalRequest,
 } from './requestType';
 
+// eslint-disable-next-line  @typescript-eslint/no-require-imports
 const config = require('config');
 
 let ctx: { orderId?: number } = {};
@@ -29,10 +30,10 @@ const testInit = async () => {
 
 const optionalCallbackTest = async () => {
   const options = {
-    optionsCallback: function(option: any) {
+    optionsCallback: function (option: any) {
       assert.equal(option.method, 'GET');
     },
-    responseCallback: function(response: any) {
+    responseCallback: function (response: any) {
       assert.equal(response.success, 1);
     },
   };
@@ -47,7 +48,7 @@ const authMethodTest = async () => {
     authMethod: 'RequestTime',
   };
   const requestTimeOptions = {
-    optionsCallback: function(option: any) {
+    optionsCallback: function (option: any) {
       assert(!option.headers['ACCESS-NONCE']);
       assert(option.headers['ACCESS-REQUEST-TIME']);
       assert(option.headers['ACCESS-TIME-WINDOW']);
@@ -61,7 +62,7 @@ const authMethodTest = async () => {
     authMethod: 'Nonce',
   };
   const nonceOptions = {
-    optionsCallback: function(option: any) {
+    optionsCallback: function (option: any) {
       assert(option.headers['ACCESS-NONCE']);
       assert(!option.headers['ACCESS-REQUEST-TIME']);
       assert(!option.headers['ACCESS-TIME-WINDOW']);
@@ -78,7 +79,7 @@ const nonceIncrementTest = async () => {
     authMethod: 'Nonce',
   };
   const options = {
-    optionsCallback: function(option: any) {
+    optionsCallback: function (option: any) {
       nonces.push(option.headers['ACCESS-NONCE']);
     },
   };

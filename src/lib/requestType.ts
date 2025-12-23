@@ -74,7 +74,7 @@ export interface TradeHistoryRequest {
 
 // Deposit
 export interface DepositHistoryRequest {
-  asset: string;
+  asset?: string;
   count?: number;
   since?: number;
   end?: number;
@@ -83,7 +83,7 @@ export interface DepositHistoryRequest {
 
 // Withdraw
 export interface WithdrawalHistoryRequest {
-  asset: string;
+  asset?: string;
   count?: number;
   since?: number;
   end?: number;

@@ -71,14 +71,14 @@ export interface AssetResponse {
   stop_withdrawal: boolean;
   withdrawal_fee:
     | {
-      min: string;
-      max: string;
-    } // for fiat.
+        min: string;
+        max: string;
+      } // for fiat.
     | {
-      under: string;
-      over: string;
-      threshold: string;
-    }; // for cryptocurrencies.
+        under: string;
+        over: string;
+        threshold: string;
+      }; // for cryptocurrencies.
 
   // only for cryptocurrencies.
   network_list?: {

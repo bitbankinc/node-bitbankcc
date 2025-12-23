@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "watch": true,
     "declaration": false,
     "sourceMap": true
   }

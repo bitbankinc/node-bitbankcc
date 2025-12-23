@@ -16,6 +16,7 @@ function getYesterdayYYYYMMDD(): string {
   return date.getFullYear() + m + d;
 }
 
+// eslint-disable-next-line  @typescript-eslint/no-require-imports
 const config = require('config');
 
 const getTickerTest = async () => {

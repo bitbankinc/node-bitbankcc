@@ -1,7 +1,19 @@
 import * as crypto from 'crypto';
 import * as querystring from 'querystring';
 import { Api, ApiOptions } from './api';
-import { PrivateApiConfig } from './type';
+import {
+  ActiveOrderRequest,
+  CancelOrderRequest,
+  CancelOrdersRequest,
+  DepositHistoryRequest,
+  GetOrderRequest,
+  GetOrdersRequest,
+  OrderRequest,
+  TradeHistoryRequest,
+  WithdrawalAccountRequest,
+  WithdrawalHistoryRequest,
+  WithdrawalRequest,
+} from './requestType';
 import {
   ActiveOrdersResponse,
   AssetsResponse,
@@ -18,29 +30,13 @@ import {
   WithdrawalHistoryResponse,
   WithdrawalResponse,
 } from './responseType';
-import {
-  ActiveOrderRequest,
-  CancelOrderRequest,
-  CancelOrdersRequest,
-  DepositHistoryRequest,
-  GetOrderRequest,
-  GetOrdersRequest,
-  OrderRequest,
-  TradeHistoryRequest,
-  WithdrawalAccountRequest,
-  WithdrawalHistoryRequest,
-  WithdrawalRequest,
-} from './requestType';
+import { PrivateApiConfig } from './type';
 
 const URL_API_BITBANK = 'https://api.bitbank.cc/v1';
 
 export class PrivateApi extends Api {
   private static toSha256(key: string, value: string): string {
-    return crypto
-      .createHmac('sha256', key)
-      .update(Buffer.from(value))
-      .digest('hex')
-      .toString();
+    return crypto.createHmac('sha256', key).update(Buffer.from(value)).digest('hex').toString();
   }
 
   private readonly apiKey: string;
@@ -168,10 +164,7 @@ export class PrivateApi extends Api {
 
   private makeRequestTimeHeader(uri: string): any {
     const requestTime = new Date().getTime();
-    const message: string = requestTime
-      .toString()
-      .concat(this.timeWindow.toString())
-      .concat(uri);
+    const message: string = requestTime.toString().concat(this.timeWindow.toString()).concat(uri);
     return {
       'Content-Type': 'application/json',
       'ACCESS-KEY': this.apiKey,
