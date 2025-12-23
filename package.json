@@ -1,13 +1,13 @@
 {
   "name": "node-bitbankcc",
-  "version": "4.1.0",
+  "version": "4.3.0",
   "description": "node-bitbankcc",
   "repository": {
     "type": "git",
     "url": "https://github.com/bitbankinc/node-bitbankcc"
   },
   "engines": {
-    "node": ">= 12.0.0"
+    "node": ">= 18.18.0"
   },
   "license": "MIT",
   "main": "dist/index.js",
@@ -15,36 +15,38 @@
   "scripts": {
     "build": "rm -rf dist; tsc -p tsconfig.json",
     "ci:prettier": "npm run format -- --list-different",
-    "ci:lint": "npm run tslint",
-    "format": "prettier --config .prettierrc --write \"src/**/*.ts\"",
+    "ci:lint": "npm run lint",
+    "format": "npm run lint -- --fix && prettier --config .prettierrc --write \"src/**/*.ts\"",
     "tsc": "rm -rf dist; tsc -p tsconfig.development.json",
-    "tslint": "tslint --project ./tsconfig.json",
+    "lint": "node --max-old-space-size=8000 node_modules/.bin/eslint './src/**/*.ts'",
     "test": "NODE_ENV=test mocha src/**/*.test.ts --require ts-node/register --timeout 10000 --require intelli-espower-loader",
     "test:prod": "NODE_ENV=production mocha src/**/*.test.ts --require ts-node/register --timeout 10000 --require intelli-espower-loader",
-    "prepare": "npm run build",
-    "prepublish:sandbox": "rm -fr node_modules && npm ci && npm run build && jq \".version += \\\"-$(git rev-parse HEAD)\\\" | .name |= \\\"@bitbank-sandbox/\\\" + .\" package.json > dist/package.json && cp -rf .npmignore dist",
-    "publish:sandbox": "cd dist && npm publish --registry https://gitlab.p0fuy9f4prap28og.bitbank.cc/api/v4/projects/578/packages/npm/"
+    "prepare": "npm run build"
   },
   "ciNode": "8",
   "devDependencies": {
-    "@types/config": "0.0.34",
+    "@types/config": "0.0.41",
     "@types/mocha": "5.2.7",
-    "@types/node": "^12.6.8",
+    "@types/node": "^12.20.55",
     "@types/power-assert": "1.5.0",
-    "@types/readline-sync": "1.4.3",
-    "config": "3.2.2",
-    "intelli-espower-loader": "1.0.1",
-    "mocha": "6.2.0",
+    "@types/readline-sync": "1.4.8",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "config": "3.3.12",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.3",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.0",
+    "intelli-espower-loader": "1.1.0",
+    "mocha": "^11.7.0",
     "power-assert": "1.6.1",
-    "prettier": "1.18.2",
-    "readline-sync": "1.4.9",
-    "ts-node": "8.3.0",
-    "tslint": "5.18.0",
-    "tslint-eslint-rules": "5.4.0",
-    "typescript": "3.5.3",
-    "vrsource-tslint-rules": "6.0.0"
+    "prettier": "^3.6.0",
+    "readline-sync": "1.4.10",
+    "ts-node": "8.10.2",
+    "typescript": "5.8.3"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^0.30.0"
   }
 }

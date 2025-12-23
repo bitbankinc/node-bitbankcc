@@ -8,25 +8,38 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        node-version: [18.20.8, 20.x, 22.x]
+    if: github.repository == 'bitbankinc/node-bitbankcc'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.17.6
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run build
   lint:
+    strategy:
+      matrix:
+        node-version: [18.20.8, 20.x, 22.x]
+    if: github.repository == 'bitbankinc/node-bitbankcc'
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.17.6
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run ci:lint
       - run: npm run ci:prettier
   test:
+    strategy:
+      max-parallel: 1
+      matrix:
+        node-version: [18.20.8, 20.x, 22.x]
+    if: github.repository == 'bitbankinc/node-bitbankcc'
     runs-on: ubuntu-22.04
     services:
       mock:
@@ -43,6 +56,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 14.17.6
+          node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: npm run test
